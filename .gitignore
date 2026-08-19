@@ -1,0 +1,58 @@
+# --- Build output (CMake) ---
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+_deps/
+
+# --- Compiled objects / binaries (C++) ---
+*.o
+*.obj
+*.out
+*.exe
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+a.out
+
+# --- CUDA intermediates ---
+*.ptx
+*.cubin
+*.fatbin
+*.fatbin.c
+*.cudafe1.*
+*.module_id
+*.i
+*.ii
+*.gpu
+*.stub.c
+*.sm_*.cubin
+
+# --- Profiler output (Nsight Compute / Systems) ---
+*.ncu-rep
+*.nsys-rep
+*.qdrep
+*.qdstrm
+*.sqlite
+
+# --- Python (bench/plot.py) ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# --- Editor / OS / misc ---
+.vscode/
+.idea/
+CLAUDE.md
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
