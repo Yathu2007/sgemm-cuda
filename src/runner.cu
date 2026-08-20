@@ -6,6 +6,7 @@
 #include <cstdio>
 
 #include "kernels/00_naive.cuh"
+#include "kernels/01_coalesced.cuh"
 #include "utils.h"
 
 int parse_kernel_id(const std::string &s) {
@@ -24,6 +25,7 @@ const char *kernel_name(int id) {
   switch (id) {
     case KERNEL_CUBLAS: return "cublas";
     case 0: return "K0_naive";
+    case 1: return "K1_coalesced";
     default: return "unknown";
   }
 }
@@ -33,6 +35,7 @@ void run_kernel(int id, int N, const float *dA, const float *dB, float *dC,
   switch (id) {
     case KERNEL_CUBLAS: cublas_sgemm(handle, N, dA, dB, dC); break;
     case 0: k0::launch(N, dA, dB, dC); break;
+    case 1: k1::launch(N, dA, dB, dC); break;
     default:
       fprintf(stderr, "run_kernel: unknown kernel id %d\n", id);
       exit(EXIT_FAILURE);

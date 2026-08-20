@@ -34,6 +34,7 @@ void usage(const char *prog) {
       "\n"
       "kernels:\n"
       "  0        K0 naive\n"
+      "  1        K1 global memory coalescing\n"
       "  cublas   cuBLAS SGEMM baseline (FP32, no TF32)\n"
       "\n"
       "options:\n"

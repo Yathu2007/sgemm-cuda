@@ -5,10 +5,10 @@
 #include <string>
 #include <vector>
 
-// Kernel ids follow the ladder: 0 = K0 naive, ...
+// Kernel ids follow the ladder: 0 = K0 naive, 1 = K1 coalesced, ...
 // KERNEL_CUBLAS is the baseline every rung is measured against.
 constexpr int KERNEL_CUBLAS = -1;
-constexpr int KERNEL_MAX_ID = 0;  // bump as rungs land
+constexpr int KERNEL_MAX_ID = 1;  // bump as rungs land
 
 // Returns the ladder id for "0".."5" or "cublas"; INT_MIN if unrecognised.
 int parse_kernel_id(const std::string &s);
