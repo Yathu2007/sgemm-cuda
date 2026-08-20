@@ -56,3 +56,6 @@ CLAUDE.md
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# temp stuff
+temp/
