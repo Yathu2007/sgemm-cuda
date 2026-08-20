@@ -3,7 +3,7 @@
 # size, logs GPU clocks alongside, and renders the results table and chart.
 #
 #   usage: bench/sweep.sh
-#   env:   WARMUP=5 ITERS=50 SIZES="128 256 ..." KERNELS="cublas"
+#   env:   WARMUP=5 ITERS=50 SIZES="128 256 ..." KERNELS="0 cublas"
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -13,8 +13,7 @@ WARMUP="${WARMUP:-5}"
 ITERS="${ITERS:-50}"
 SIZES="${SIZES:-128 256 512 1024 2048 4096}"
 # cuBLAS first so the baseline row exists even if a later kernel aborts.
-# The ladder is empty so far; each rung appends its id here as it lands.
-KERNELS="${KERNELS:-cublas}"
+KERNELS="${KERNELS:-cublas 0}"
 
 RESULTS="$ROOT/results/results.csv"
 CLOCKS="$ROOT/results/clocks.csv"

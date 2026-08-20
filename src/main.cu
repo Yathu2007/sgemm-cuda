@@ -15,7 +15,7 @@
 namespace {
 
 struct Options {
-  int kernel = KERNEL_CUBLAS;
+  int kernel = 0;
   int N = 1024;
   int warmup = 5;
   int iters = 50;
@@ -33,6 +33,7 @@ void usage(const char *prog) {
       "       %s <id|cublas> <N> [options]\n"
       "\n"
       "kernels:\n"
+      "  0        K0 naive\n"
       "  cublas   cuBLAS SGEMM baseline (FP32, no TF32)\n"
       "\n"
       "options:\n"
@@ -97,7 +98,7 @@ bool parse_args(int argc, char **argv, Options &o) {
     }
   }
   if (o.kernel == INT_MIN) {
-    fprintf(stderr, "unknown kernel (no ladder kernels yet -- expected 'cublas')\n");
+    fprintf(stderr, "unknown kernel (expected 0..%d or 'cublas')\n", KERNEL_MAX_ID);
     return false;
   }
   if (o.N <= 0 || o.iters <= 0 || o.warmup < 0) {
