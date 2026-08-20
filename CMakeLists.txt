@@ -10,8 +10,28 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "" FORCE)
 endif()
 
-# RTX 4050 Laptop / Ada AD107 is compute capability 8.9. Confirmed by device_query below
+# RTX 4050 Laptop / Ada AD107 is compute capability 8.9. Confirmed by
+# device_query below rather than assumed.
 set(CMAKE_CUDA_ARCHITECTURES 89)
+
+# -O3 for speed, -lineinfo for Nsight Compute source correlation, and
+# --ptxas-options=-v so register counts land in the build log (later rungs need
+# them to reason about occupancy).
+# Deliberately NO --use_fast_math: it changes numerics and would make the
+# cuBLAS comparison dishonest.
+add_compile_options($<$<COMPILE_LANGUAGE:CUDA>:-O3>
+                    $<$<COMPILE_LANGUAGE:CUDA>:-lineinfo>
+                    $<$<COMPILE_LANGUAGE:CUDA>:--ptxas-options=-v>)
+
+find_package(CUDAToolkit REQUIRED)
+
+add_executable(sgemm
+  src/main.cu
+  src/runner.cu
+  src/utils.cu
+)
+target_include_directories(sgemm PRIVATE ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR})
+target_link_libraries(sgemm PRIVATE CUDA::cublas)
 
 # Dumps the hardware numbers the blocktiling parameters will be chosen against.
 add_executable(device_query tools/device_query.cu)
