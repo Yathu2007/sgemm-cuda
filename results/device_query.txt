@@ -1,0 +1,23 @@
+Device 0: NVIDIA GeForce RTX 4050 Laptop GPU
+  Compute capability            : 8.9  (-arch=sm_89)
+  CUDA driver / runtime version : 13.3 / 13.0
+  SM count                      : 20
+  Global memory                 : 6140 MiB
+  L2 cache size                 : 24576 KiB
+  Memory bus width              : 96 bit
+  Memory clock                  : 8001 MHz
+  Theoretical bandwidth         : 192.0 GB/s
+  SM clock (boost)              : 2055 MHz
+  Shared memory per block       : 49152 B
+  Shared memory per block (optin): 101376 B
+  Shared memory per SM          : 102400 B
+  Registers per block           : 65536
+  Registers per SM              : 65536
+  Max threads per block         : 1024
+  Max threads per SM            : 1536
+  Warp size                     : 32
+  Max block dim                 : (1024, 1024, 64)
+  Max grid dim                  : (2147483647, 65535, 65535)
+  Concurrent kernels            : 1
+  Async engine count            : 1
+  Unified addressing            : 1
