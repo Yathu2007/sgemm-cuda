@@ -35,3 +35,16 @@ target_link_libraries(sgemm PRIVATE CUDA::cublas)
 
 # Dumps the hardware numbers the blocktiling parameters will be chosen against.
 add_executable(device_query tools/device_query.cu)
+
+# Reproduces the split-k investigation behind the exactly-zero relative error at
+# N >= 2048: compares cuBLAS and a sequential-k kernel against a float64 host
+# reference. OpenMP only shortens that host loop - the tool builds without it
+# and reports identical numbers.
+add_executable(accuracy_probe tools/accuracy_probe.cu)
+target_link_libraries(accuracy_probe PRIVATE CUDA::cublas)
+find_package(OpenMP)
+if(OpenMP_CXX_FOUND)
+  target_compile_options(accuracy_probe PRIVATE
+    $<$<COMPILE_LANGUAGE:CUDA>:-Xcompiler=-fopenmp>)
+  target_link_libraries(accuracy_probe PRIVATE OpenMP::OpenMP_CXX)
+endif()
